@@ -1,3 +1,30 @@
+//Action Library 
+global.actionLibrary =
+{
+	attack:
+	{
+		name :  "Attack",
+		description : "{0} attacks!",
+		subMenu : -1,
+		targetRequired : true,
+		targetEnemyByDefault : true,
+		targetAll : MODE.NEVER,
+		userAnimation : "attack",
+		effectSprite : sAttackBonk,
+		effectOnTarget : MODE.ALWAYS,
+		func : function(_user, _targets)
+		{
+			var _damage = ceil(_user.strength + random_range(-_user.strength * 0.25, _user.strength * 0.25));
+			BattleChangeHP(_targets[0], -_damage, 0);
+		}
+	}
+}
+enum MODE
+{
+	NEVER = 0,
+	ALWAYS = 1,
+	VARIES = 2
+}
 
 //Party data
 global.party = 
@@ -35,13 +62,20 @@ global.enemies =
 		hpMax: 30,
 		mp: 0,
 		mpMax: 0,
-		strength: 5,
+		strength: 4,
 		sprites: { idle: sSlime, attack: sSlimeAttack},
-		actions: [],
+		actions: [global.actionLibrary.attack],
 		xpValue : 15,
 		AIscript : function()
 		{
-			//enemy turn ai goes here
+			//attack random party member
+			var _action = actions[0];
+			var _possibleTargets = array_filter(oBattle.partyUnits, function(_unit, _index)
+			{
+				return (_unit.hp > 0);	
+			});
+			var _target = _possibleTargets[irandom(array_length(_possibleTargets) -1)];
+			return [ _action, _target];
 		}
 	}
 	,
@@ -54,11 +88,18 @@ global.enemies =
 		mpMax: 0,
 		strength: 4,
 		sprites: { idle: sBat, attack: sBatAttack},
-		actions: [],
+		actions: [global.actionLibrary.attack],
 		xpValue : 18,
 		AIscript : function()
 		{
-			//enemy turn ai goes here
+			//attack random party member
+			var _action = actions[0];
+			var _possibleTargets = array_filter(oBattle.partyUnits, function(_unit, _index)
+			{
+				return (_unit.hp > 0);	
+			});
+			var _target = _possibleTargets[irandom(array_length(_possibleTargets) -1)];
+			return [ _action, _target];
 		}
 	}
 }
