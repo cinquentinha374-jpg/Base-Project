@@ -19,6 +19,6 @@ if(active)
 	}
 	if (keyboard_check_pressed(vk_escape))
 	{
-		if(subMenu > 0) MenuGoBack();
+		if(subMenuLevel > 0) MenuGoBack();
 	}
 }

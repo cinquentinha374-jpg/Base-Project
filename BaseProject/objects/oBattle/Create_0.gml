@@ -2,16 +2,30 @@ instance_deactivate_all(true);
 
 units = [];
 turn = 0;
-unitTurnOrder = [];
-unitRenderOrder = [];
-
 turnCount = 0;
 roundCount = 0;
 battleWaitTimeFrames = 30;
 battleWaitTimeRemaining = 0;
+battleText = "";
 currentUser = noone;
 currentAction = -1;
 currentTargets = noone;
+unitTurnOrder = [];
+unitRenderOrder = [];
+
+//Make targetting cursor
+cursor = 
+{
+	activeUser : noone,
+	activeTarget : noone,
+	activeAction : -1,
+	targetSide : -1,
+	targetIndex	: 0,
+	targetAll : false,
+	confirmDelay : 0,
+	active : false
+};
+
 
 //Make enemies
 for (var i = 0; i < array_length(enemies); i++)
@@ -43,37 +57,77 @@ RefreshRenderOrder = function ()
 RefreshRenderOrder();
 
 
-function battleStateSelectAction()
+function BattleStateSelectAction()
 {
-	//Get current unit
-	var _unit = unitTurnOrder[turn];
-	
-	//Is the unit dead or unable to act?
-	if (!instance_exists(_unit)) || (_unit.hp <= 0)
+	if(!instance_exists(oMenu))
 	{
-		battleState = BattleStateVictoryCheck;
-		exit;
-	}
+		//Get current unit
+		var _unit = unitTurnOrder[turn];
 	
-	//Select an action to perform
-	//BeginAction(_unit.id, global.actionLibrary.attack, _unit.id);
-
-	//If unit is player controlle
-	if (_unit.object_index == oBattleUnitPC)
-	{
-			//attack random party member
-			var _action = global.actionLibrary.attack;
-			var _possibleTargets = array_filter(oBattle.enemyUnits, function(_unit, _index)
+		//Is the unit dead or unable to act?
+		if (!instance_exists(_unit)) || (_unit.hp <= 0)
+		{
+			battleState = BattleStateVictoryCheck;
+			exit;
+		}
+	
+		//Select an action to perform
+		//BeginAction(_unit.id, global.actionLibrary.attack, _unit.id);
+	
+		//If unit is player controlle
+		if (_unit.object_index == oBattleUnitPC)
+		{
+			//Compile the action menu
+			var _menuOptions = [];
+			var _subMenus = {};
+			
+			var _actionList = _unit.actions;
+			
+			for (var i =  0; i < array_length(_actionList); i++)
 			{
-				return (_unit.hp > 0);	
-			});
-			var _target = _possibleTargets[irandom(array_length(_possibleTargets) -1)];
-			BeginAction(_unit.id, _action, _target);
-	}
-	else
-	{
-		var _enemyAction = _unit.AIscript();
-		if (_enemyAction != -1) BeginAction(_unit.id, _enemyAction[0], _enemyAction[1]);
+				var _action = _actionList[i];
+				var _available = true;
+				var _nameAndCount = _action.name;
+				if(_action.subMenu == -1)
+				{
+					array_push(_menuOptions, [_nameAndCount, MenuSelectAction, [_unit, _action], _available]);
+				}
+				else
+				{
+					//create or add to submenu
+					if (is_undefined(_subMenus [$ _action.subMenu]))
+					{
+						variable_struct_set(_subMenus, _action.subMenu, [[_nameAndCount, MenuSelectAction, [_unit, _action], _available]]);
+					}
+					else
+					{
+						array_push(_subMenus [$ _action.subMenu], [_nameAndCount, MenuSelectAction, [_unit, _action], _available]);
+					}
+				}
+			}
+			
+			//turn sub menus into an array
+			var _subMenusArray = variable_struct_get_names(_subMenus);
+			for (var i = 0; i < array_length(_subMenusArray); i++)
+			{
+				//sort submenu if needed
+				//(here)
+					
+				//add back option at the end of each submenu
+				array_push(_subMenus [$ _subMenusArray[i]], ["Back", MenuGoBack, -1, true]);
+				//add submenu into main menu
+				array_push(_menuOptions, [_subMenusArray[i], SubMenu, [_subMenus[$ _subMenusArray[i]]], true]);
+			}
+			
+			
+			Menu(x+10, y+110, _menuOptions, , 74, 60);
+					
+		}
+		else
+		{
+			var _enemyAction = _unit.AIscript();
+			if (_enemyAction != -1) BeginAction(_unit.id, _enemyAction[0], _enemyAction[1]);
+		}
 	}
 }
 
@@ -82,6 +136,7 @@ function BeginAction(_user, _action, _targets)
 	currentUser = _user;
 	currentAction = _action;
 	currentTargets = _targets;
+	battleText = string_ext(_action.description, [_user.name]);
 	if (!is_array(currentTargets)) currentTargets = [currentTargets];
 	battleWaitTimeRemaining = battleWaitTimeFrames;
 	with(_user)
@@ -151,6 +206,7 @@ function BattleStateVictoryCheck()
 
 function BattleStateTurnProgession()
 {
+	battleText = "";
 	turnCount++;
 	turn++;
 	//Loop turns
@@ -159,10 +215,10 @@ function BattleStateTurnProgession()
 		turn = 0;
 		roundCount++;
 	}
-	battleState = battleStateSelectAction;
+	battleState = BattleStateSelectAction;
 }
 
-battleState = battleStateSelectAction;
+battleState = BattleStateSelectAction;
 
 
 

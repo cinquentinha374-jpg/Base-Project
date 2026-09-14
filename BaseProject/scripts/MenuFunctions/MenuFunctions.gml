@@ -1,4 +1,4 @@
-
+///@desc Menu - makes a menu, options provided in the form [["name", function, argument], [...]]
 function Menu(_x, _y, _options, _description = -1, _width = undefined, _height = undefined)
 {
 	with (instance_create_depth(_x, _y, -99999, oMenu))
@@ -15,7 +15,7 @@ function Menu(_x, _y, _options, _description = -1, _width = undefined, _height =
 		heightLine = 12;
 		
 		//Auto width
-		if (_width = undefined)
+		if (_width == undefined)
 		{
 			width = 1;
 			if (description != -1) width = max(width, string_width(_description));
@@ -56,11 +56,55 @@ function SubMenu(_options)
 
 function MenuGoBack()
 {
-	subMenuLevel--;
-	options = optionsAbove[subMenuLevel];
-	hover = 0;
+		subMenuLevel--;
+        options = optionsAbove[subMenuLevel];
+        hover = 0;
 }
 
+function MenuSelectAction(_user, _action)
+{
+	with (oMenu) active = false;
+	
+	//Active the targetting cursor if needed, or simply begin the action
+	with (oBattle)
+	{
+		if(_action.targetRequired)
+		{
+			with(cursor)
+			{
+				active = true;
+				activeAction = _action;
+				targetAll = _action.targetAll;
+				if (targetAll == MODE.VARIES) targetAll = true; //"toggle" starts as
+				activeUser = _user;
+				
+				//Which side to target by default?
+				if (_action.targetEnemyByDefault) //target enemy by default
+				{
+					targetIndex = 0;
+					targetSide = oBattle.enemyUnits;
+					activeTarget = oBattle.enemyUnits[targetIndex];
+				}
+				else //target self by default
+				{
+					targetSide = oBattle.partyUnits;
+					activeTarget = activeUser;
+					var _findSelf = function(_element)
+					{
+						return (_element == activeTarget)
+					}
+					targetIndex = array_find_index(oBattle.partyUnits, _findSelf);
+				}
+			}
+		}
+		else
+		{
+			//If no target neede, begin the action and end the menu
+			BeginAction(_user, _action, -1);
+			with (oMenu) instance_destroy();
+		}
+	}
+}
 
 
 

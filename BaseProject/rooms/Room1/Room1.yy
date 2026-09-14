@@ -29,7 +29,7 @@
           -2,66,-14,-2147483648,1,64,-20,-2147483648,1,65,-20,-2147483648,4,65,-2147483648,-2147483648,63,-16,
           -2147483648,2,64,63,-17,-2147483648,1,63,-100,-2147483648,1,64,-171,-2147483648,1,78,-43,-2147483648,
           1,63,-157,-2147483648,1,63,-43,-2147483648,
-        ],"TileDataFormat":1,},"tilesetId":{"name":"tTiles","path":"tilesets/tTiles/tTiles.yy",},"userdefinedDepth":false,"visible":false,"x":0,"y":0,},
+        ],"TileDataFormat":1,},"tilesetId":{"name":"tTiles","path":"tilesets/tTiles/tTiles.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
     {"$GMRTileLayer":"","%Name":"Tiles_1","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_1","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":23,"SerialiseWidth":40,"TileCompressedData":[
           -6,38,1,39,-8,15,3,16,17,35,-22,32,-4,38,3,41,53,54,-6,15,3,16,17,35,-3,32,1,67,-6,32,1,67,-7,32,1,19,
           -5,47,-2,38,3,41,53,54,-7,15,2,16,35,-20,32,1,33,-5,15,-2,53,1,54,-9,15,4,46,47,47,20,-14,32,1,19,-3,
