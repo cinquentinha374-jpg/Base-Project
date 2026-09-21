@@ -1,0 +1,43 @@
+=====================================================================
+PASSO A PASSO: ENVIAR PROJETO GAMEMAKER PARA O GITHUB (DO ZERO)
+=====================================================================
+
+1. ENTRAR NA PASTA CORRETA DO JOGO
+Abra o terminal (PowerShell) e garanta que está na pasta raiz do seu projeto (onde fica o arquivo .yyp):
+cd "C:\Users\20241500022\Desktop\BaseProject"
+
+
+2. LIMPAR CONFIGURAÇÕES ANTIGAS DO GIT
+Para evitar conflitos de tentativas anteriores ou pastas duplicadas, apague o Git antigo dessa pasta:
+Remove-Item -Path .git -Force -Recurse
+
+
+3. REINICIAR O GIT DO ZERO
+Inicie um repositório totalmente limpo e defina a branch principal como 'main':
+git init
+git branch -M main
+
+
+4. CRIAR O ARQUIVO .GITIGNORE (OBRIGATÓRIO PARA GAMEMAKER)
+Execute o comando abaixo para criar o arquivo que impede o envio de caches e arquivos temporários inúteis do jogo:
+echo "options/" > .gitignore; echo "caches/" >> .gitignore; echo "adi/" >> .gitignore; echo "*.user" >> .gitignore
+
+
+5. CONECTAR O TERMINAL AO REPOSITÓRIO DO GITHUB
+Vincule a sua pasta local ao link do seu repositório online:
+git remote add origin https://github.com/cinquentinha374-jpg/Base-Project.git
+
+
+6. ADICIONAR OS ARQUIVOS E CRIAR O COMMIT
+Prepare todos os arquivos do seu jogo e salve o estado atual deles localmente:
+git add .
+git commit -m "Primeiro commit oficial do projeto"
+
+
+7. FORÇAR O ENVIO DE DEFINITIVO PARA A NUVEM
+Como o repositório online tinha arquivos criados pelo site (conflito de histórico), use o comando force para enviar tudo com sucesso:
+git push -u origin main --force
+
+=====================================================================
+PRONTO! Seu projeto agora está atualizado e seguro no GitHub.
+=====================================================================
