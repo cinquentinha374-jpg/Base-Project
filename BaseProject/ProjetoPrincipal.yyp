@@ -59,7 +59,6 @@
     {"id":{"name":"BattleFunctions","path":"scripts/BattleFunctions/BattleFunctions.yy",},},
     {"id":{"name":"GameData","path":"scripts/GameData/GameData.yy",},},
     {"id":{"name":"MenuFunctions","path":"scripts/MenuFunctions/MenuFunctions.yy",},},
-    {"id":{"name":"Green_Greens","path":"sounds/Green_Greens/Green_Greens.yy",},},
     {"id":{"name":"sAttackBonk","path":"sprites/sAttackBonk/sAttackBonk.yy",},},
     {"id":{"name":"sAttackCure","path":"sprites/sAttackCure/sAttackCure.yy",},},
     {"id":{"name":"sAttackExplode","path":"sprites/sAttackExplode/sAttackExplode.yy",},},

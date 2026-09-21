@@ -35,6 +35,7 @@
     {"name":"BattleFunctions","order":4,"path":"scripts/BattleFunctions/BattleFunctions.yy",},
     {"name":"GameData","order":3,"path":"scripts/GameData/GameData.yy",},
     {"name":"MenuFunctions","order":5,"path":"scripts/MenuFunctions/MenuFunctions.yy",},
+    {"name":"Green_Greens","order":7,"path":"sounds/Green_Greens/Green_Greens.yy",},
     {"name":"sAttackBonk","order":21,"path":"sprites/sAttackBonk/sAttackBonk.yy",},
     {"name":"sAttackCure","order":1,"path":"sprites/sAttackCure/sAttackCure.yy",},
     {"name":"sAttackExplode","order":6,"path":"sprites/sAttackExplode/sAttackExplode.yy",},

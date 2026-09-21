@@ -14,3 +14,8 @@ function FourDirectionAnimate() {
 		animIndex -= _animLength;
 	}else animationEnd = false;
 }
+
+if (!audio_is_playing(Green_Greens))
+{
+    audio_play_sound(Green_Greens, 10, true);
+}
