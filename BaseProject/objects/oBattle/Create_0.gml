@@ -1,6 +1,16 @@
-instance_deactivate_all(true);
+// Remember the player position and the map enemy that started this encounter.
+// The map is deactivated during battle, so these instances remain available.
+returnX = creator.x;
+returnY = creator.y;
+defeatedEnemy = encounterEnemy;
+
+// Keep the map instances active during battle. The battle scene draws over the map,
+// while the player is frozen by global.inBattleTransition. This lets us return
+// to the same map without losing or deactivating the field instances.
 
 units = [];
+enemyUnits = [];
+partyUnits = [];
 turn = 0;
 turnCount = 0;
 roundCount = 0;
@@ -201,7 +211,76 @@ function BattleStatePerformAction()
 
 function BattleStateVictoryCheck()
 {
-	battleState = BattleStateTurnProgession;
+    // Check whether at least one enemy is still alive.
+    var _enemyAlive = false;
+
+    for (var i = 0; i < array_length(enemyUnits); i++)
+    {
+        var _enemy = enemyUnits[i];
+
+        if (instance_exists(_enemy) && _enemy.hp > 0)
+        {
+            _enemyAlive = true;
+            break;
+        }
+    }
+
+    if (!_enemyAlive)
+    {
+        battleState = BattleStateVictory;
+        exit;
+    }
+
+    battleState = BattleStateTurnProgession;
+}
+
+function BattleStateVictory()
+{
+    // Start the return transition while keeping the map underneath intact.
+    // The transition covers the battle, cleans up the defeated enemy at full black,
+    // then reveals the map again.
+    if (!instance_exists(oBattleTransition))
+    {
+        instance_create_depth
+        (
+            camera_get_view_x(view_camera[0]),
+            camera_get_view_y(view_camera[0]),
+            -100000,
+            oBattleTransition,
+            {
+                mode: "exit",
+                creator: creator,
+                defeatedEnemy: defeatedEnemy,
+                returnX: returnX,
+                returnY: returnY
+            }
+        );
+    }
+
+    // Close any battle menu.
+    if (instance_exists(oMenu))
+    {
+        with (oMenu) instance_destroy();
+    }
+
+    // Remove battle-only units and effects.
+    for (var i = 0; i < array_length(units); i++)
+    {
+        if (instance_exists(units[i]))
+        {
+            with (units[i]) instance_destroy();
+        }
+    }
+
+    with (oBattleEffect) instance_destroy();
+    with (oBattleFloatingText) instance_destroy();
+
+    // The map enemy and player position are handled by oBattleTransition
+    // while the screen is fully black.
+    global.inBattleTransition = true;
+
+    // End this battle controller.
+    instance_destroy();
 }
 
 function BattleStateTurnProgession()

@@ -1,14 +1,24 @@
-function NewEncounter(_enemies, _bg)
+function NewEncounter(_enemies, _bg, _player = noone, _enemyInstance = noone)
 {
-		instance_create_depth
-		(
-			camera_get_view_x(view_camera[0]),
-			camera_get_view_y(view_camera[0]),
-			-9999,
-			oBattle,
-			{enemies: _enemies, creator: id, battleBackground: _bg}
-		);
-	
+    // Avoid triggering multiple encounters while the player is touching an enemy.
+    if (variable_global_exists("inBattleTransition") && global.inBattleTransition) exit;
+
+    global.inBattleTransition = true;
+
+    // Play the encounter transition first. The battle is created when it ends.
+    instance_create_depth
+    (
+        camera_get_view_x(view_camera[0]),
+        camera_get_view_y(view_camera[0]),
+        -100000,
+        oBattleTransition,
+        {
+            enemies: _enemies,
+            battleBackground: _bg,
+            creator: _player,
+            encounterEnemy: _enemyInstance
+        }
+    );
 }
 
 function BattleChangeHP(_target, _amount, _AliveDeadOrEither = 0)
@@ -60,26 +70,3 @@ function BattleChangeMP(_target, _amount, _AliveDeadOrEither = 0)
 	);
 	if (!_failed) _target.hp = clamp(_target.hp + _amount, 0, _target.hpMax);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

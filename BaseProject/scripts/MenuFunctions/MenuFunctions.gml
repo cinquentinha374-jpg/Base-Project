@@ -82,8 +82,14 @@ function MenuSelectAction(_user, _action)
 				if (_action.targetEnemyByDefault) //target enemy by default
 				{
 					targetIndex = 0;
-					targetSide = oBattle.enemyUnits;
-					activeTarget = oBattle.enemyUnits[targetIndex];
+					targetSide = array_filter(oBattle.enemyUnits, function(_element, _index)
+					{
+						return instance_exists(_element) && _element.hp > 0;
+					});
+					if (array_length(targetSide) > 0)
+						activeTarget = targetSide[targetIndex];
+					else
+						active = false;
 				}
 				else //target self by default
 				{

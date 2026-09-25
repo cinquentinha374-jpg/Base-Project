@@ -32,8 +32,22 @@ if(cursor.active)
 		{
 			targetSide = array_filter(targetSide, function(_element, _index)
 			{
-				return _element.hp > 0;
+				return instance_exists(_element) && _element.hp > 0;
 			});
+		}
+		else if (targetSide == oBattle.partyUnits)
+		{
+			targetSide = array_filter(targetSide, function(_element, _index)
+			{
+				return instance_exists(_element) && _element.hp > 0;
+			});
+		}
+
+		// No valid targets: leave target mode instead of indexing an empty array.
+		if (array_length(targetSide) <= 0)
+		{
+			active = false;
+			exit;
 		}
 		
 		//move between targets

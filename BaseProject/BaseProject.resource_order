@@ -26,6 +26,7 @@
     {"name":"fnM5x7","order":1,"path":"fonts/fnM5x7/fnM5x7.yy",},
     {"name":"oBattleEffect","order":4,"path":"objects/oBattleEffect/oBattleEffect.yy",},
     {"name":"oBattleFloatingText","order":5,"path":"objects/oBattleFloatingText/oBattleFloatingText.yy",},
+    {"name":"oBattleTransition","order":7,"path":"objects/oBattleTransition/oBattleTransition.yy",},
     {"name":"oBattleUnit","order":1,"path":"objects/oBattleUnit/oBattleUnit.yy",},
     {"name":"oBattleUnitEnemy","order":3,"path":"objects/oBattleUnitEnemy/oBattleUnitEnemy.yy",},
     {"name":"oBattleUnitPC","order":2,"path":"objects/oBattleUnitPC/oBattleUnitPC.yy",},
