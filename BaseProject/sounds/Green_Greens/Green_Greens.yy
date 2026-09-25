@@ -14,8 +14,8 @@
   "exportDir":"",
   "name":"Green_Greens",
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
   "preload":false,
   "resourceType":"GMSound",
