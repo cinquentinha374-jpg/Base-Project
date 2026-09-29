@@ -1,6 +1,6 @@
 {
   "$GMProject":"v1",
-  "%Name":"BaseProject",
+  "%Name":"LostSouls",
   "AudioGroups":[
     {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
@@ -39,7 +39,7 @@
   "MetaData":{
     "IDEVersion":"2026.0.0.16",
   },
-  "name":"BaseProject",
+  "name":"LostSouls",
   "resources":[
     {"id":{"name":"fnM3x6","path":"fonts/fnM3x6/fnM3x6.yy",},},
     {"id":{"name":"fnM5x7","path":"fonts/fnM5x7/fnM5x7.yy",},},
@@ -63,6 +63,7 @@
     {"id":{"name":"MenuFunctions","path":"scripts/MenuFunctions/MenuFunctions.yy",},},
     {"id":{"name":"Green_Greens","path":"sounds/Green_Greens/Green_Greens.yy",},},
     {"id":{"name":"colisao","path":"sprites/colisao/colisao.yy",},},
+    {"id":{"name":"outrosTiles","path":"sprites/outrosTiles/outrosTiles.yy",},},
     {"id":{"name":"sAttackBonk","path":"sprites/sAttackBonk/sAttackBonk.yy",},},
     {"id":{"name":"sAttackCure","path":"sprites/sAttackCure/sAttackCure.yy",},},
     {"id":{"name":"sAttackExplode","path":"sprites/sAttackExplode/sAttackExplode.yy",},},
@@ -91,6 +92,7 @@
     {"id":{"name":"sSlimeAttack","path":"sprites/sSlimeAttack/sSlimeAttack.yy",},},
     {"id":{"name":"sTiles","path":"sprites/sTiles/sTiles.yy",},},
     {"id":{"name":"sTurnIndicator","path":"sprites/sTurnIndicator/sTurnIndicator.yy",},},
+    {"id":{"name":"TileSet2","path":"tilesets/TileSet2/TileSet2.yy",},},
     {"id":{"name":"tTiles","path":"tilesets/tTiles/tTiles.yy",},},
   ],
   "resourceType":"GMProject",
