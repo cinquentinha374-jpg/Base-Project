@@ -5,7 +5,8 @@
     {"$GMAutoTileSet":"","%Name":"Grass","closed_edge":false,"name":"Grass","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[15,48,46,47,18,33,49,19,16,50,31,20,17,34,35,32,],},
     {"$GMAutoTileSet":"","%Name":"Water","closed_edge":false,"name":"Water","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[15,54,52,53,24,39,56,41,22,55,37,40,23,26,25,38,],},
     {"$GMAutoTileSet":"","%Name":"autotile_1","closed_edge":false,"name":"autotile_1","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],},
-    {"$GMAutoTileSet":"","%Name":"autotile_2","closed_edge":false,"name":"autotile_2","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[101,104,103,86,89,100,118,85,88,119,102,87,116,115,117,0,],},
+    {"$GMAutoTileSet":"","%Name":"Grass 2","closed_edge":false,"name":"Grass 2","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[101,104,103,86,89,100,118,85,88,119,102,87,116,115,117,15,],},
+    {"$GMAutoTileSet":"","%Name":"Terra","closed_edge":false,"name":"Terra","resourceType":"GMAutoTileSet","resourceVersion":"2.0","tiles":[32,35,34,17,20,31,49,16,19,50,33,18,47,46,48,15,],},
   ],
   "macroPageTiles":{
     "SerialiseHeight":0,
