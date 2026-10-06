@@ -116,6 +116,10 @@ function BattleStateSelectAction()
 				}
 			}
 			
+			// Add the inventory as an Undertale-style submenu.
+			var _itemOptions = InventoryGetMenuOptions(_unit);
+			array_push(_menuOptions, ["ITEM", SubMenu, [_itemOptions], true]);
+
 			//turn sub menus into an array
 			var _subMenusArray = variable_struct_get_names(_subMenus);
 			for (var i = 0; i < array_length(_subMenusArray); i++)

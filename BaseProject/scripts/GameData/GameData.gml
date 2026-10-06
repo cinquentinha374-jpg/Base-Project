@@ -51,6 +51,103 @@ enum MODE
 	VARIES = 2
 }
 
+// Item library
+// Items are data-driven so new consumables can be added here without changing the battle menu.
+global.itemLibrary =
+{
+	potion:
+	{
+		name: "Potion",
+		description: "Restores 30 HP.",
+		targetRequired: true,
+		targetEnemyByDefault: false,
+		targetAll: MODE.NEVER,
+		canUse: function(_target)
+		{
+			return _target.hp < _target.hpMax;
+		},
+		canUseAny: function()
+		{
+			for (var i = 0; i < array_length(global.party); i++)
+			{
+				if (global.party[i].hp < global.party[i].hpMax) return true;
+			}
+			return false;
+		},
+		use: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				BattleChangeHP(_targets[i], 30, 0);
+			}
+		}
+	},
+
+	hiPotion:
+	{
+		name: "Hi-Potion",
+		description: "Restores 60 HP.",
+		targetRequired: true,
+		targetEnemyByDefault: false,
+		targetAll: MODE.NEVER,
+		canUse: function(_target)
+		{
+			return _target.hp < _target.hpMax;
+		},
+		canUseAny: function()
+		{
+			for (var i = 0; i < array_length(global.party); i++)
+			{
+				if (global.party[i].hp < global.party[i].hpMax) return true;
+			}
+			return false;
+		},
+		use: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				BattleChangeHP(_targets[i], 60, 0);
+			}
+		}
+	},
+
+	monsterCandy:
+	{
+		name: "Monster Candy",
+		description: "Restores 10 HP.",
+		targetRequired: true,
+		targetEnemyByDefault: false,
+		targetAll: MODE.NEVER,
+		canUse: function(_target)
+		{
+			return _target.hp < _target.hpMax;
+		},
+		canUseAny: function()
+		{
+			for (var i = 0; i < array_length(global.party); i++)
+			{
+				if (global.party[i].hp < global.party[i].hpMax) return true;
+			}
+			return false;
+		},
+		use: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				BattleChangeHP(_targets[i], 10, 0);
+			}
+		}
+	}
+};
+
+// Undertale-style inventory: up to 8 item slots, with identical items stacked.
+global.inventory =
+[
+	{ key: "potion", item: global.itemLibrary.potion, amount: 3 },
+	{ key: "hiPotion", item: global.itemLibrary.hiPotion, amount: 1 },
+	{ key: "monsterCandy", item: global.itemLibrary.monsterCandy, amount: 2 }
+];
+
 //Party data
 global.party = 
 [

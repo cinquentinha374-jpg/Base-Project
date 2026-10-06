@@ -79,13 +79,22 @@ if(cursor.active)
 			}
 		}
 		
-		//Confirm action
+		//Confirm action. Items validate the selected ally before consuming anything.
 		if (_keyConfirm)
 		{
-			with (oBattle) BeginAction(cursor.activeUser, cursor.activeAction, cursor.activeTarget);
-			with (oMenu) instance_destroy();
-			active = false;
-			confirmDelay = 0;
+			var _canConfirm = true;
+			if (variable_struct_exists(activeAction, "inventoryIndex"))
+			{
+				_canConfirm = InventoryCanUse(activeAction.inventoryIndex, activeTarget);
+			}
+
+			if (_canConfirm)
+			{
+				with (oBattle) BeginAction(cursor.activeUser, cursor.activeAction, cursor.activeTarget);
+				with (oMenu) instance_destroy();
+				active = false;
+				confirmDelay = 0;
+			}
 		}
 		
 		//Cancek & return to menu

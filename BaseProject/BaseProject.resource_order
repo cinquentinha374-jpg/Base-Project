@@ -36,6 +36,7 @@
     {"name":"oSlime","order":1,"path":"objects/oSlime/oSlime.yy",},
     {"name":"BattleFunctions","order":4,"path":"scripts/BattleFunctions/BattleFunctions.yy",},
     {"name":"GameData","order":3,"path":"scripts/GameData/GameData.yy",},
+    {"name":"InventoryFunctions","order":6,"path":"scripts/InventoryFunctions/InventoryFunctions.yy",},
     {"name":"MenuFunctions","order":5,"path":"scripts/MenuFunctions/MenuFunctions.yy",},
     {"name":"colisao","order":35,"path":"sprites/colisao/colisao.yy",},
     {"name":"sAttackBonk","order":21,"path":"sprites/sAttackBonk/sAttackBonk.yy",},
