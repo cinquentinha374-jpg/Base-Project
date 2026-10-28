@@ -2,10 +2,10 @@
 battleState();
 
 //Cursor control
-if(cursor.active)
+if (cursor.active && is_struct(cursor.activeAction) && is_array(cursor.targetSide))
 {
-	with(cursor)
-	{
+    with (cursor)
+    {
 		//input
 		var _keyUp = keyboard_check_pressed(vk_up);
 		var _keyDown = keyboard_check_pressed(vk_down);
@@ -27,6 +27,14 @@ if(cursor.active)
 		if (_moveH == -1) targetSide = oBattle.partyUnits;
 		if (_moveH == 1) targetSide = oBattle.enemyUnits;
 		
+        // If action/target data is invalid, safely return to the item menu.
+        if (!is_struct(activeAction))
+        {
+            active = false;
+            with (oMenu) active = true;
+            exit;
+        }
+
 		//verify target list
 		if (targetSide == oBattle.enemyUnits)
 		{

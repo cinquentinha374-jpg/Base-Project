@@ -59,6 +59,7 @@ global.itemLibrary =
 	{
 		name: "Potion",
 		description: "Restores 30 HP.",
+        healAmount: 30,
 		targetRequired: true,
 		targetEnemyByDefault: false,
 		targetAll: MODE.NEVER,
@@ -87,6 +88,7 @@ global.itemLibrary =
 	{
 		name: "Hi-Potion",
 		description: "Restores 60 HP.",
+        healAmount: 60,
 		targetRequired: true,
 		targetEnemyByDefault: false,
 		targetAll: MODE.NEVER,
@@ -115,6 +117,7 @@ global.itemLibrary =
 	{
 		name: "Monster Candy",
 		description: "Restores 10 HP.",
+        healAmount: 10,
 		targetRequired: true,
 		targetEnemyByDefault: false,
 		targetAll: MODE.NEVER,

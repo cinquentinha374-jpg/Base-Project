@@ -19,6 +19,7 @@ if(active)
 	}
 	if (keyboard_check_pressed(vk_escape))
 	{
-		if(subMenuLevel > 0) MenuGoBack();
+		if (subMenuLevel > 0) MenuGoBack();
+        else if (!instance_exists(oBattle)) instance_destroy();
 	}
 }

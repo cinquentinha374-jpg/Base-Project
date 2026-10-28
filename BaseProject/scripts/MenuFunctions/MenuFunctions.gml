@@ -6,7 +6,7 @@ function Menu(_x, _y, _options, _description = -1, _width = undefined, _height =
 		options = _options;
 		description = _description;
 		var _optionsCount = array_length(_options);
-		vissibleOptionsMax = _optionsCount;
+		visibleOptionsMax = _optionsCount;
 		
 		//Set up size
 		xmargin = 10;
@@ -56,9 +56,16 @@ function SubMenu(_options)
 
 function MenuGoBack()
 {
-		subMenuLevel--;
-        options = optionsAbove[subMenuLevel];
-        hover = 0;
+    if (subMenuLevel <= 0)
+    {
+        // At the field inventory root, Back closes the menu.
+        if (!instance_exists(oBattle)) instance_destroy();
+        return;
+    }
+
+    subMenuLevel--;
+    options = optionsAbove[subMenuLevel];
+    hover = 0;
 }
 
 function MenuSelectAction(_user, _action)
